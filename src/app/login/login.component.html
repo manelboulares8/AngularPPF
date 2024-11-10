@@ -2,8 +2,9 @@
   <h2 class="text-center">Connexion</h2>
 
   <!-- Affichage du message d'erreur si les identifiants sont incorrects -->
-  <div *ngIf="errorMessage" class="alert alert-danger">
+  <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
     {{ errorMessage }}
+    <button type="button" class="btn-close" (click)="errorMessage = ''" aria-label="Close"></button>
   </div>
   <form (ngSubmit)="login()">
     <div class="form-group">

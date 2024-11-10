@@ -8,15 +8,15 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent {
-  isLoggedIn: boolean = false;
-  userRole: string = ''; // 'admin' ou autre rôle
+  isLoggedIn: boolean = false; // 'admin' ou autre rôle
+  role: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     // Vérifier si l'utilisateur est connecté et récupérer son rôle
     this.isLoggedIn = this.authService.isLoggedIn();
-    this.userRole = this.authService.getRole();
+    this.role = this.authService.getRole();
   }
 
   logout(): void {

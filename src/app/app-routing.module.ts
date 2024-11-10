@@ -5,6 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ListeCommandesComponent } from './admin-dashboard/commandes/liste-commandes/liste-commandes.component';
 import { AjouterCommandeComponent } from './admin-dashboard/commandes/ajouter-commande/ajouter-commande.component';
+import { RoleGuard } from './guards/role.guard';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +18,12 @@ const routes: Routes = [
       { path: 'commandes/ajouter', component: AjouterCommandeComponent }, 
     ]
   } , 
+  {
+    path: 'caissier-dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [RoleGuard],
+    data: { role: 'caissier' }  // Protéger avec le rôle 'caissier'
+  },
   { path: '', redirectTo: '', pathMatch: 'full' },  // Liste des commandes // Redirige vers la page d'accueil pour les routes inconnues
 ];
 

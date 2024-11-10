@@ -3,7 +3,6 @@
   <body>
     <nav class="navbar navbar-expand-lg" style="background-color: #4caf50;">
       <div class="container-fluid">
-        <!-- Logo et nom de la pharmacie -->
         <a class="navbar-brand" href="#">
           <img src="assets/logo.png" alt="PharmaPlus Logo" width="30" height="30" class="d-inline-block align-text-top">
           Gestion PharmaPlus
@@ -21,17 +20,8 @@
                 Médicaments
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" routerLink="/admin-dashboard/medicaments/ajouter">Ajouter Médicament</a></li>
+                <li *ngIf="role === 'admin'"><a class="dropdown-item" routerLink="/admin-dashboard/medicaments/ajouter">Ajouter Médicament</a></li>
                 <li><a class="dropdown-item" routerLink="/admin-dashboard/medicaments/liste">Lister Médicaments</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Employés
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" routerLink="/admin-dashboard/employes/ajouter">Ajouter Employé</a></li>
-                <li><a class="dropdown-item" routerLink="/admin-dashboard/employes/liste">Lister Employés</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -43,15 +33,21 @@
                 <li><a class="dropdown-item" routerLink="/admin-dashboard/commandes/liste">Lister Commandes</a></li>
               </ul>
             </li>
+            <!-- Section réservée aux admins pour gérer les employés -->
+            <li *ngIf="role === 'admin'" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Employés
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" routerLink="/admin-dashboard/employes/liste">Lister Employés</a></li>
+                <li><a class="dropdown-item" routerLink="/admin-dashboard/employes/ajouter">Ajouter Employé</a></li>
+              </ul>
+            </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light" type="submit">Search</button>
-          </form>
           <ul class="navbar-nav ms-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-bs-toggle="dropdown" aria-expanded="false">
-                ADMIN
+                {{role | uppercase}} (Admin)
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#" (click)="logout()">Logout</a></li>
@@ -64,11 +60,10 @@
     </nav>
 
     <div class="container mt-5" id="dashboard-container">
-      <h2>Bienvenue, Administrateur</h2>
+      <h2>Bienvenue, {{role | uppercase}}</h2>
       <p>Voici votre tableau de bord.</p>
     </div>
 
-    <!-- Contenu dynamique de l'application -->
     <router-outlet></router-outlet>
   </body>
 </html>
