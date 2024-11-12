@@ -9,8 +9,7 @@ import { RoleGuard } from './guards/role.guard';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent},  // Route pour la page d'accueil
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent, 
     children: [
@@ -24,7 +23,7 @@ const routes: Routes = [
     canActivate: [RoleGuard],
     data: { role: 'caissier' }  // Protéger avec le rôle 'caissier'
   },
-  { path: '', redirectTo: '', pathMatch: 'full' },  // Liste des commandes // Redirige vers la page d'accueil pour les routes inconnues
+  { path: '**', redirectTo: '' }   // Liste des commandes // Redirige vers la page d'accueil pour les routes inconnues
 ];
 
 @NgModule({

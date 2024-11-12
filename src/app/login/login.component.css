@@ -22,8 +22,12 @@ button {
   padding: 10px;
   background-color: #28a745;
   border-color: #28a745;
+  
 }
-
+.b{
+  display: flex;           /* Active Flexbox */
+  justify-content: center; /* Centre horizontalement */
+}
 button:hover {
   background-color: #218838;
   border-color: #1e7e34;

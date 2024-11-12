@@ -22,6 +22,6 @@ export class AdminDashboardComponent {
   logout(): void {
     // Appel à la méthode de déconnexion du service d'authentification
     this.authService.logout();
-    this.router.navigate(['/home']); // Redirection vers la page d'accueil après la déconnexion
+    this.router.navigate(['login']); // Redirection vers la page d'accueil après la déconnexion
   }
 }

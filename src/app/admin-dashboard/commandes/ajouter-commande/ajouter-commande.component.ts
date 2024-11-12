@@ -21,7 +21,7 @@ export class AjouterCommandeComponent implements OnInit {
   ngOnInit(): void {
     this.commandeForm = this.fb.group({
       nomClient: ['', [Validators.required]], // Validation du champ nomClient
-      montantTotal: [0, [Validators.required, Validators.min(1)]], // Validation du montant
+      montantTotal: ['', [Validators.required, Validators.min(1)]], // Validation du montant
       dateCommande: ['', [Validators.required]], // Validation de la date
       quantite: [1, [Validators.required, Validators.min(1)]],
     });
