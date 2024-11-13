@@ -10,6 +10,9 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { ListeCommandesComponent } from './admin-dashboard/commandes/liste-commandes/liste-commandes.component';
 import { RouterModule } from '@angular/router';
 import { AjouterCommandeComponent } from './admin-dashboard/commandes/ajouter-commande/ajouter-commande.component';
+import { ListerMedicamentComponent } from './admin-dashboard/medicament/lister-medicament/lister-medicament.component';
+import { AjouterMedicamentComponent } from './admin-dashboard/medicament/ajouter-medicament/ajouter-medicament.component';
+import { ModifierMedicamentComponent } from './admin-dashboard/medicament/modifier-medicament/modifier-medicament.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { AjouterCommandeComponent } from './admin-dashboard/commandes/ajouter-co
     AdminDashboardComponent,
     ListeCommandesComponent,
     AjouterCommandeComponent,
+    ListerMedicamentComponent,
+    AjouterMedicamentComponent,
+    ModifierMedicamentComponent,
   ],
   imports: [
     BrowserModule,

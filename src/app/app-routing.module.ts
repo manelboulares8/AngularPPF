@@ -6,6 +6,9 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { ListeCommandesComponent } from './admin-dashboard/commandes/liste-commandes/liste-commandes.component';
 import { AjouterCommandeComponent } from './admin-dashboard/commandes/ajouter-commande/ajouter-commande.component';
 import { RoleGuard } from './guards/role.guard';
+import { AjouterMedicamentComponent } from './admin-dashboard/medicament/ajouter-medicament/ajouter-medicament.component';
+import { ListerMedicamentComponent } from './admin-dashboard/medicament/lister-medicament/lister-medicament.component';
+import { ModifierMedicamentComponent } from './admin-dashboard/medicament/modifier-medicament/modifier-medicament.component';
 
 
 const routes: Routes = [
@@ -15,6 +18,10 @@ const routes: Routes = [
     children: [
       { path: 'commandes/liste', component: ListeCommandesComponent }, 
       { path: 'commandes/ajouter', component: AjouterCommandeComponent }, 
+      {path : 'medicament/listerMedicament',component:ListerMedicamentComponent},
+      { path: '', redirectTo: 'medicament/listerMedicament', pathMatch: 'full' },
+      {path : 'medicament/ajouterMedicament',component:AjouterMedicamentComponent},
+      { path: 'medicament/modifierMedicament/:id', component: ModifierMedicamentComponent },
     ]
   } , 
   {

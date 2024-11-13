@@ -20,8 +20,8 @@
                 Médicaments
               </a>
               <ul class="dropdown-menu">
-                <li *ngIf="role === 'admin'"><a class="dropdown-item" routerLink="/admin-dashboard/medicaments/ajouter">Ajouter Médicament</a></li>
-                <li><a class="dropdown-item" routerLink="/admin-dashboard/medicaments/liste">Lister Médicaments</a></li>
+                <li><a class="dropdown-item" routerLink="/admin-dashboard/medicament/listerMedicament">Lister Médicaments</a></li>
+                <li *ngIf="role === 'admin'"><a class="dropdown-item" routerLink="/admin-dashboard/medicament/ajouterMedicament">Ajouter Médicament</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -29,8 +29,8 @@
                 Commandes
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" routerLink="/admin-dashboard/commandes/ajouter">Ajouter Commande</a></li>
                 <li><a class="dropdown-item" routerLink="/admin-dashboard/commandes/liste">Lister Commandes</a></li>
+                <li><a class="dropdown-item" routerLink="/admin-dashboard/commandes/ajouter">Ajouter Commande</a></li>
               </ul>
             </li>
             <!-- Section réservée aux admins pour gérer les employés -->
