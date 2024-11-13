@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MedicamentService } from '../../../services/medicament.service';
 import { medicament } from '../../../model/medicament.model';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-lister-medicament',
@@ -10,11 +11,13 @@ import { medicament } from '../../../model/medicament.model';
 })
 export class ListerMedicamentComponent implements OnInit {
   medicaments!: medicament[];
+  role!: string;
 
-  constructor(private router: Router, private medicamentService: MedicamentService) {}
+  constructor(private router: Router, private medicamentService: MedicamentService , private authService: AuthService) {}
 
   ngOnInit(): void {
     this.medicaments = this.medicamentService.listerMedicament();
+    this.role = this.authService.getRole(); 
   }
 
   supprimerMedicament(m: medicament) {

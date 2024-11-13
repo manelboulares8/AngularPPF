@@ -24,11 +24,15 @@ const routes: Routes = [
       { path: 'medicament/modifierMedicament/:id', component: ModifierMedicamentComponent },
     ]
   } , 
-  {
+  { 
     path: 'caissier-dashboard',
     component: AdminDashboardComponent,
     canActivate: [RoleGuard],
-    data: { role: 'caissier' }  // Protéger avec le rôle 'caissier'
+    data: { role: 'caissier' },
+    children: [
+      { path: 'medicament/listerMedicament', component: ListerMedicamentComponent },
+      { path: '', redirectTo: 'medicament/listerMedicament', pathMatch: 'full' } // Rediriger le caissier vers la liste des médicaments
+    ]
   },
   { path: '**', redirectTo: '' }   // Liste des commandes // Redirige vers la page d'accueil pour les routes inconnues
 ];

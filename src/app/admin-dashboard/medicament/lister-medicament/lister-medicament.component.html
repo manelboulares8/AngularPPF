@@ -20,8 +20,8 @@
     <td>{{medicament.barCode}}</td>
     <td>{{medicament.qteS}}</td>
 
-    <td><a class="btn btn-danger" (click)="supprimerMedicament(medicament)"  >Supprimer</a></td>
-    <td><a class="btn btn-success" (click)="modifierMedicament(medicament.id)" >Modifier</a></td>
+    <td><a *ngIf="role === 'admin'" class="btn btn-danger" (click)="supprimerMedicament(medicament)"  >Supprimer</a></td>
+    <td><a *ngIf="role === 'admin'" class="btn btn-success" (click)="modifierMedicament(medicament.id)" >Modifier</a></td>
 
     </tr>
     </tbody>
