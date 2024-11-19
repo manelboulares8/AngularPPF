@@ -9,6 +9,9 @@ import { RoleGuard } from './guards/role.guard';
 import { AjouterMedicamentComponent } from './admin-dashboard/medicament/ajouter-medicament/ajouter-medicament.component';
 import { ListerMedicamentComponent } from './admin-dashboard/medicament/lister-medicament/lister-medicament.component';
 import { ModifierMedicamentComponent } from './admin-dashboard/medicament/modifier-medicament/modifier-medicament.component';
+import { AddEmployesComponent } from './admin-dashboard/employes/add-employes/add-employes.component';
+import { ListerEmployesComponent } from './admin-dashboard/employes/lister-employes/lister-employes.component';
+import { UpdateEmployesComponent } from './admin-dashboard/employes/update-employes/update-employes.component';
 
 
 const routes: Routes = [
@@ -22,6 +25,9 @@ const routes: Routes = [
       { path: '', redirectTo: 'medicament/listerMedicament', pathMatch: 'full' },
       {path : 'medicament/ajouterMedicament',component:AjouterMedicamentComponent},
       { path: 'medicament/modifierMedicament/:id', component: ModifierMedicamentComponent },
+      { path: 'employes/lister', component: ListerEmployesComponent }, 
+      { path: 'employes/add', component: AddEmployesComponent },
+      { path: 'employes/update/:id', component: UpdateEmployesComponent },
     ]
   } , 
   { 

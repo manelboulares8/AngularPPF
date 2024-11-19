@@ -13,6 +13,9 @@ import { AjouterCommandeComponent } from './admin-dashboard/commandes/ajouter-co
 import { ListerMedicamentComponent } from './admin-dashboard/medicament/lister-medicament/lister-medicament.component';
 import { AjouterMedicamentComponent } from './admin-dashboard/medicament/ajouter-medicament/ajouter-medicament.component';
 import { ModifierMedicamentComponent } from './admin-dashboard/medicament/modifier-medicament/modifier-medicament.component';
+import { ListerEmployesComponent } from './admin-dashboard/employes/lister-employes/lister-employes.component';
+import { AddEmployesComponent } from './admin-dashboard/employes/add-employes/add-employes.component';
+import { UpdateEmployesComponent } from './admin-dashboard/employes/update-employes/update-employes.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { ModifierMedicamentComponent } from './admin-dashboard/medicament/modifi
     ListerMedicamentComponent,
     AjouterMedicamentComponent,
     ModifierMedicamentComponent,
+    ListerEmployesComponent,
+    AddEmployesComponent,
+    UpdateEmployesComponent,
   ],
   imports: [
     BrowserModule,
