@@ -25,6 +25,10 @@ export class MedicamentService {
       ngOnInit(): void {
         throw new Error('Method not implemented.');
       }
+      getMedicaments(): medicament[] {
+        return this.medicament;
+    }
+      
       listerMedicament():medicament [] {
         return this.medicament;}
         getNextId(): number {
@@ -79,6 +83,7 @@ export class MedicamentService {
                   console.log("Médicament non trouvé pour modification !");
                 }
               }
+              
               
     /*consulterMed(id:number):medicament{
       return   this.medicamentt= this.medicament.find(m => m.id == id)!;

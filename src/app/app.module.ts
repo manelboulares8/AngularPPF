@@ -16,6 +16,7 @@ import { ModifierMedicamentComponent } from './admin-dashboard/medicament/modifi
 import { ListerEmployesComponent } from './admin-dashboard/employes/lister-employes/lister-employes.component';
 import { AddEmployesComponent } from './admin-dashboard/employes/add-employes/add-employes.component';
 import { UpdateEmployesComponent } from './admin-dashboard/employes/update-employes/update-employes.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { UpdateEmployesComponent } from './admin-dashboard/employes/update-emplo
     FormsModule,
     CommonModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [
     provideClientHydration(),

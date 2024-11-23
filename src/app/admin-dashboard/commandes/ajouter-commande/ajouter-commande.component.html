@@ -8,6 +8,17 @@
           Le nom du client est requis.
         </div>
       </div>
+      <div class="form-group">
+        <label for="nomMedicament">Nom du Médicament</label>
+        <select id="nomMedicament" formControlName="nomMedicament" class="form-control">
+          <option *ngFor="let medicament of medicament" [value]="medicament.nom">
+            {{ medicament.nom }}
+          </option>
+        </select>
+        <div *ngIf="commandeForm.get('nomMedicament')?.invalid && commandeForm.get('nomMedicament')?.touched" class="text-danger">
+            Le nom du médicament est requis.
+        </div>
+    </div>
   
       <div class="form-group">
         <label for="montantTotal">Montant Total</label>
