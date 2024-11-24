@@ -24,7 +24,13 @@ export class UpdateEmployesComponent implements OnInit {
     const id = +this.activatedRoute.snapshot.params['id'];
     console.log('ID récupéré depuis la route :', id);
 
-    this.newEmploye = this.employeService.consulterEmploye(id);
+    this.employeService.consulterEmploye(id).subscribe(employe => {
+      if (employe) {
+        this.newEmploye = employe;
+      } else {
+        console.error('Employé non trouvé ou erreur de récupération.');
+      }
+    });
 
     if (!this.newEmploye) {
       console.error('Employé non trouvé');

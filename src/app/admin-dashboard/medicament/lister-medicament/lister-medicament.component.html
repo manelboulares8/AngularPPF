@@ -6,7 +6,9 @@
     <tr>
     <th>Liste des médicaments </th>
     </tr>
-    <tr><th>Nom</th>
+    <tr>
+    <th>ID</th>
+    <th>Nom</th>
     <th>Prix</th>
     <th>Code à barre</th>
     <th>Quantité disponible </th>
@@ -15,6 +17,7 @@
     </thead>
     <tbody *ngFor="let medicament of medicaments">
     <tr >
+    <td>{{medicament.id}}</td>
     <td>{{medicament.nom}}</td>
     <td>{{medicament.prix}}</td>
     <td>{{medicament.barCode}}</td>

@@ -5,7 +5,7 @@
     <form [formGroup]="myForm" >
         <div class="form-group">
             <label >ID :</label>
-            <input type="number" [(ngModel)]= "newMedicament.id"name="id" class="form-control" formControlName="id" readonly>
+            <input type="number" [(ngModel)]= "newMedicament.id"name="id" class="form-control" formControlName="id" >
             <span *ngIf="myForm.controls['id'].hasError('required') && myForm.controls['id'].touched" class="text-danger">Le id est obligatoire </span>
            
             </div>

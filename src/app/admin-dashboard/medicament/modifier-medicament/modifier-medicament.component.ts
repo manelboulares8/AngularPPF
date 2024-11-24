@@ -22,8 +22,17 @@ export class ModifierMedicamentComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params['id']; // Récupérer l'ID de la route
-    this.newMedicament = this.medicamentService.consulterMedicament(id); // Remplir `newMedicament` avec les données récupérées
-
+    //this.newMedicament = this.medicamentService.consulterMedicament(id); // Remplir `newMedicament` avec les données récupérées
+    this.medicamentService.consulterMedicament(id).subscribe({
+      next: (medicament) => {
+        this.newMedicament = medicament; // Remplir `newMedicament` avec les données récupérées
+        this.myForm.patchValue(this.newMedicament); // Mettre à jour le formulaire
+      },
+      error: (err) => {
+        console.error('Erreur lors du chargement du médicament', err);
+      },
+    });
+  
     this.myForm = this.formBuilder.group({
       id: [this.newMedicament.id, [Validators.required]],
       nom: [this.newMedicament.nom, [Validators.required, Validators.minLength(3)]],
@@ -45,7 +54,7 @@ export class ModifierMedicamentComponent implements OnInit {
   }
 
   modifierMedicament() {
-    if (this.myForm.valid) {
+  /*  if (this.myForm.valid) {
       // Mise à jour des valeurs de `newMedicament` avec le formulaire
       this.newMedicament = { ...this.newMedicament, ...this.myForm.value };
       console.log("Médicament à modifier : ", this.newMedicament);
@@ -56,5 +65,24 @@ export class ModifierMedicamentComponent implements OnInit {
       // Redirection vers la liste des médicaments après la modification
       this.router.navigate(['/admin-dashboard/medicament/listerMedicament']);
     }
-  }
-}
+  }*/
+    if (this.myForm.valid) {
+      // Mise à jour des valeurs de `newMedicament` avec les données du formulaire
+      this.newMedicament = { ...this.newMedicament, ...this.myForm.value };
+  
+      console.log("Médicament à modifier : ", this.newMedicament);
+  
+      // Appel de la méthode pour modifier le médicament
+      this.medicamentService.modifierMed(this.newMedicament).subscribe({
+        next: (response) => {
+          console.log('Médicament modifié avec succès', response);
+  
+          // Redirection après la modification
+          this.router.navigate(['/admin-dashboard/medicament/listerMedicament']);
+        },
+        error: (err) => {
+          console.error('Erreur lors de la modification du médicament', err);
+        },
+      });
+    }
+  }}

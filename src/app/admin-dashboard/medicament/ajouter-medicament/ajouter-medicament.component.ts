@@ -20,8 +20,9 @@ export class AjouterMedicamentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.newMedicament.id = this.medicamentService.getNextId();
-
+ // this.newMedicament.id = this.medicamentService.getNextId();
+  
+  
     this.myForm = this.formBuilder.group({
       id: ['', [Validators.required]],
       nom: ['', [Validators.required, Validators.minLength(3)]],
@@ -42,8 +43,17 @@ export class AjouterMedicamentComponent implements OnInit {
   }
 
   addMedicament() {
-    console.log(this.newMedicament);
+   /* console.log(this.newMedicament);
     this.medicamentService.ajouterMedicament(this.newMedicament);
     this.router.navigate(['/admin-dashboard/medicament/listerMedicament']);
-  }
-}
+  }*/
+    this.medicamentService.ajouterMedicament(this.newMedicament).subscribe({
+      next: (etud) => {
+        console.log(etud);
+        this.router.navigate(['/admin-dashboard/medicament/listerMedicament']);
+      },
+      error: (err) => {
+        console.error("Erreur lors de l'ajout du médicament", err);
+      }
+    });
+  }}

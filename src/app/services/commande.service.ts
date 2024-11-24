@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CommandeService {
-  apiURL: string = 'http://localhost:8090/pharmaplus/api'; // URL de l'API
+  apiURL: string = 'http://localhost:8082/medicament/api/commande'; // URL de l'API
 
   // Définir les options HTTP par défaut (headers par exemple)
   httpOptions = {

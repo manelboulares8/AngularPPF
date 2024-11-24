@@ -16,17 +16,39 @@ export class ListerMedicamentComponent implements OnInit {
   constructor(private router: Router, private medicamentService: MedicamentService , private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.medicaments = this.medicamentService.listerMedicament();
-    this.role = this.authService.getRole(); 
-  }
+    /*this.medicaments = this.medicamentService.listerMedicament();
+    this.role = this.authService.getRole(); */
+    this.chargerMedicament();
 
-  supprimerMedicament(m: medicament) {
+  }
+  chargerMedicament(){
+    this.medicamentService.listeMedicament().subscribe(prods => {
+    console.log(prods);
+    this.medicaments = prods;
+    });
+    }
+
+  /*supprimerMedicament(m: medicament) {
     let conf = confirm("Vous êtes sûr ?");
     if (conf) {
       this.medicamentService.supprimerMedicament(m);
       this.medicaments = this.medicamentService.listerMedicament(); // Met à jour la liste après suppression
     }
-  }
+  }*/
+    supprimerMedicament(p: medicament) {
+      let conf = confirm("Etes-vous sûr ?");
+      if (conf) {
+        this.medicamentService.supprimerMedicament(p).subscribe({
+          next: () => {
+            console.log("Étudiant supprimé");
+            this.chargerMedicament(); // Recharge la liste des étudiants
+          },
+          error: (err) => {
+            console.error("Erreur lors de la suppression de l'étudiant", err);
+          }
+        });
+      }
+    }
 
   modifierMedicament(id: number) {
     this.router.navigate(['/admin-dashboard/medicament/modifierMedicament', id]);

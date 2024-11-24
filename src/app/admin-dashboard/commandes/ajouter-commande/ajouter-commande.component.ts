@@ -50,4 +50,7 @@ export class AjouterCommandeComponent implements OnInit {
       );
     }
   }
+  getMedicaments(): medicament[] {
+    return this.medicament!;
+}
 }

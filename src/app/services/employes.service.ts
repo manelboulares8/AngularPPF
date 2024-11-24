@@ -1,68 +1,85 @@
 import { Injectable } from '@angular/core';
 import { Employe } from '../model/employe.model';
+import { Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeService {
   employees: Employe[] = [];
+  apiURL: string = 'http://localhost:8082/medicament/api/emp'; // URL de l'API
 
-  constructor() {
-    this.employees = [
+  // Définir les options HTTP par défaut (headers par exemple)
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+
+  constructor(private http: HttpClient) {}
+    /*this.employees = [
       { idEmploye: 1, FullNameEmploye: "Nom Prenom 1", emailEmploye: "employe1@gmail.com", NumTelEmploye: 25147789, dateNaissanceEmploye: new Date("1996-12-04") },
       { idEmploye: 2, FullNameEmploye: "Nom Prenom 2", emailEmploye: "employe2@gmail.com", NumTelEmploye: 25147789, dateNaissanceEmploye: new Date("1996-12-04") },
       { idEmploye: 3, FullNameEmploye: "Nom Prenom 3", emailEmploye: "employe3@gmail.com", NumTelEmploye: 25147789, dateNaissanceEmploye: new Date("1996-12-04") },
-    ];
-  }
+    ];*/
+  
 
   // Retourne la liste des employés
-  listeEmployes(): Employe[] {
-    return [...this.employees]; // Retourne une copie pour éviter des modifications directes
+  listeEmployes(): Observable<Employe[]> {
+    return this.http.get<Employe[]>(this.apiURL).pipe(
+      catchError(error => {
+        console.error('Erreur lors de la récupération des employés', error);
+        return of([]); // Retourne un tableau vide en cas d'erreur
+      })
+    );
   }
 
   // Ajoute un nouvel employé
-  addEmploye(employe: Employe): void {
-    employe.idEmploye = this.employees.length > 0
-      ? Math.max(...this.employees.map(e => e.idEmploye)) + 1
-      : 1;
-    this.employees.push(employe);
-    console.log('Nouvel employé ajouté :', employe);
+  addEmploye(employe: Employe): Observable<Employe | null>{
+    return this.http.post<Employe>(this.apiURL,employe, this.httpOptions).pipe(
+      catchError(error => {
+        console.error('Erreur lors de l\'ajout de l\'employé', error);
+        return of(null); // Retourne null en cas d'erreur
+      })
+    );
   }
 
   // Supprime un employé
-  supprimerEmploye(emp: Employe): void {
-    const index = this.employees.findIndex(e => e.idEmploye === emp.idEmploye);
-    if (index > -1) {
-      this.employees.splice(index, 1);
-      console.log(`Employé avec ID ${emp.idEmploye} supprimé.`);
-    } else {
-      console.warn("Employé introuvable pour suppression !");
-    }
+  supprimerEmploye(id: number): Observable<void> {
+    const url = `${this.apiURL}/${id}`;
+    return this.http.delete<void>(url, this.httpOptions).pipe(
+      catchError(error => {
+        console.error('Erreur lors de la suppression de l\'employé', error);
+        return of(); // Retourne un Observable vide en cas d'erreur
+      })
+    );
   }
 
   // Recherche un employé par ID
-  consulterEmploye(id: number): Employe | null {
-    const employe = this.employees.find(e => e.idEmploye === id) || null;
-    if (!employe) {
-      console.warn(`Aucun employé trouvé avec l'ID ${id}.`);
-    }
-    return employe;
+  consulterEmploye(id: number): Observable<Employe | null> {
+    const url = `${this.apiURL}/${id}`;
+    return this.http.get<Employe>(url).pipe(
+      catchError(error => {
+        console.error(`Erreur lors de la récupération de l'employé avec ID ${id}`, error);
+        return of(null); // Retourne null en cas d'erreur
+      })
+    );
   }
 
   // Met à jour un employé existant
-  updateEmploye(em: Employe): void {
-    const index = this.employees.findIndex(emp => emp.idEmploye === em.idEmploye);
-    if (index !== -1) {
-      this.employees[index] = { ...em };
-      console.log(`Employé avec ID ${em.idEmploye} mis à jour.`);
-    } else {
-      console.warn("Employé introuvable pour mise à jour !");
-    }
+  updateEmploye(employe: Employe): Observable<Employe | null> {
+    const url = `${this.apiURL}/${employe.idEmploye}`;
+    return this.http.put<Employe>(url, employe, this.httpOptions).pipe(
+      catchError(error => {
+        console.error(`Erreur lors de la mise à jour de l'employé avec ID ${employe.idEmploye}`, error);
+        return of(null); // Retourne null en cas d'erreur
+      })
+    );
   }
 
   // Trie les employés par ID
-  trierEmployes(): void {
-    this.employees.sort((n1, n2) => n1.idEmploye! - n2.idEmploye!);
-    console.log('Liste des employés triée par ID.');
+  trierEmployes(employees: Employe[]): Employe[] {
+    return employees.sort((n1, n2) => n1.idEmploye! - n2.idEmploye!);
   }
 }
